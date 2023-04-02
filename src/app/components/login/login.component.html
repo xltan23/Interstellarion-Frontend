@@ -1,0 +1,49 @@
+<marquee behavior="" direction="">PLACEHOLDER MESSAGE</marquee>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <!-- Encompass Login and Sign up boxes-->
+      <div class="col-md-7 mt-5">
+        <div class="card-group mb-0 mt-5">
+          <!-- LOGIN BOX -->
+          <div class="card p-3">
+            <div class="card-body">
+              <h1 class="card-title">Login</h1>
+              <p class="card-subtitle text-muted my-3">Sign in to your account</p>
+              <!-- LOGIN FORM -->
+                <form [formGroup]="loginForm" (ngSubmit)="processLogin()">
+                    <mat-form-field appearance="outline" class="form-field">
+                        <mat-label>Email</mat-label>
+                        <input type="text" style="padding-top: 10px;" matInput size="50" placeholder="Type here" formControlName="email">
+                        <mat-icon matSuffix>email</mat-icon>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" class="form-field">
+                        <mat-label>Password</mat-label>
+                        <input type="password" style="padding-top: 10px;" matInput size="50" placeholder="Type here" formControlName="password">
+                        <mat-icon matSuffix>lock</mat-icon>
+                    </mat-form-field>
+                    <div class="row">
+                        <div class="col-4">
+                            <button mat-raised-button type="submit" [disabled]="loginForm.invalid">Login</button>
+                        </div>
+                        <div class="col-6 text-right">
+                            <button type="button" class="btn btn-link px-0" (click)="forgetPassword()">Forget Password?</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+          </div>
+          <!-- SIGN UP BOX -->
+          <div class="card text-white bg-dark py-5 d-md-down-none" style="width:44%">
+            <div class="card-body text-center">
+              <div>
+                <h2 class="card-title">Sign up</h2>
+                <p class="card-subtitle my-3">Become a Dreamer and travel across the galaxy now!</p>
+                <button type="button" class="btn btn-light active mt-3" [routerLink]="['/register']">Register Now!</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

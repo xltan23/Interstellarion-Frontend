@@ -1,0 +1,69 @@
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-5 mt-5">
+            <div class="card-group mb-0 mt-5">
+                <div class="card p-3">
+                    <div class="card-body">
+                        <h1 class="card-title">BECOME A DREAMER</h1>
+                        <p class="card-subtitle text-muted my-3">Your temporary password will be emailed to you once you complete registration.</p>
+                        <!-- REGISTER FORM -->
+                        <form style="align-items: center;" [formGroup]="registerForm" (ngSubmit)="processRegister()">
+                            <mat-form-field appearance="outline" class="form-field">
+                                <mat-label>First Name</mat-label>
+                                <input type="text" style="padding-top: 10px;" matInput size="50" placeholder="Type here"
+                                    formControlName="firstName">
+                                <mat-hint align="end">Your personal name</mat-hint>
+                                <mat-icon matSuffix>person</mat-icon>
+                            </mat-form-field>
+                            <br>
+                            <br>
+                            <mat-form-field appearance="outline" class="form-field">
+                                <mat-label>Last Name</mat-label>
+                                <input type="text" style="padding-top: 10px;" matInput size="50" placeholder="Type here"
+                                    formControlName="lastName">
+                                <mat-hint align="end">Your family name</mat-hint>
+                                <mat-icon matSuffix>group</mat-icon>
+                            </mat-form-field>
+                            <br>
+                            <br>
+                            <mat-form-field appearance="outline" class="form-field">
+                                <mat-label>Email</mat-label>
+                                <input type="text" style="padding-top: 10px;" matInput size="50" placeholder="Type here"
+                                    formControlName="email">
+                                <mat-hint align="end">Your login email</mat-hint>
+                                <mat-icon matSuffix>email</mat-icon>
+                            </mat-form-field>
+                            <br>
+                            <br>
+                            <mat-radio-group appearance="outline" formControlName="gender">
+                                <mat-label>Gender</mat-label>
+                                <mat-radio-button value="M">Male</mat-radio-button> &nbsp;
+                                <mat-radio-button value="F">Female</mat-radio-button> &nbsp;
+                                <mat-radio-button value="MF">Prefer not to say</mat-radio-button>
+                            </mat-radio-group>
+                            <br>
+                            <br>
+                            <mat-form-field appearance="outline" class="form-field">
+                                <mat-label>Date Of Birth</mat-label>
+                                <input style="padding-top: 10px;" matInput [matDatepicker]="picker"
+                                    formControlName="dateOfBirth">
+                                <mat-hint align="end">MM/DD/YYYY</mat-hint>
+                                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                                <mat-datepicker #picker></mat-datepicker>
+                            </mat-form-field>
+                            <br>
+                            <br>
+                            <div class="col-4">
+                                <button mat-raised-button type="submit" [disabled]="registerForm.invalid">SIGN ME UP</button>
+                            </div>
+                            <br>
+                            <div class="col-6 text-right">
+                                Already have an account? <button type="button" class="btn btn-link px-0" [routerLink]="['/login']">Login here</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
