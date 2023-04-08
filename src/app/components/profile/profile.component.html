@@ -1,0 +1,175 @@
+<nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+    &nbsp; &nbsp; &nbsp; &nbsp; 
+    <a class="navbar-brand" href="/dreamer">Interstellarion</a>
+    
+    <div class="collapse navbar-collapse">
+        <ul class="navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link" href="#"><mat-icon>home</mat-icon></a>
+            </li>
+            <li>
+                <a class="nav-link" href="#"><mat-icon>rocket_launch</mat-icon></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#"><mat-icon>shopping_cart</mat-icon></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/profile"><mat-icon>account_circle</mat-icon></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-danger" href="#" (click)="onLogout()"><mat-icon>logout</mat-icon></a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-12 mt-5">
+            <div class="card-group mb-0 mt-5">
+                <!-- DREAMER PROFILE -->
+                <div class="card col-2 p-3" style="border: none; text-align: center; background-color: lightcyan;">
+                    <img class="rounded-circle img-center" src="{{ dreamer.profileImageUrl }}"  width="150">
+                    <ul class="list-unstyled">
+                        <li class="name"> 
+                            <mat-icon>person</mat-icon> &nbsp; &nbsp;
+                            <span style="font-weight: bold; font-size: 20px;">{{ dreamer.firstName }} {{ dreamer.lastName }}</span> &nbsp; <span class="rounded bg-info p-1 text-white" style="font-size: small;">{{ dreamer.role }}</span>
+                        </li>
+                        <br>
+                        <li class="id">
+                            <mat-icon>badge</mat-icon> &nbsp; &nbsp;
+                            Dreamer ID: {{ dreamer.dreamerId }}
+                        </li>
+                        <li class="email">
+                            <mat-icon>email</mat-icon> &nbsp; &nbsp;
+                            <span>{{ dreamer.email }}</span> &nbsp; <mat-icon class="text-success">verified</mat-icon>
+                        </li>
+                        <li class="activity">
+                            <mat-icon>calendar_today</mat-icon> &nbsp; &nbsp;
+                            Since: {{ dreamer.joinDate }}
+                        </li>
+                    </ul>
+                </div>
+                <hr>
+                <div class="card col-5 p-5">
+                    <h2 style="border-bottom: 1px solid lightgray;">Profile</h2>
+                    <ul class="list-unstyled">
+                        <li class="gender">
+                            <mat-icon>man_4</mat-icon> &nbsp;
+                            Gender: {{ dreamer.gender }}
+                        </li>
+                        <li class="dob">
+                            <mat-icon>cake</mat-icon> &nbsp; &nbsp;
+                            <span>{{ dreamer.dateOfBirth }}</span>
+                        </li>
+                        <li class="login">
+                            <mat-icon>login</mat-icon> &nbsp; &nbsp;
+                            <span class="text-muted">Last seen: {{ dreamer.lastLoginDateDisplay }}</span> 
+                        </li>
+                    </ul>
+                    <br>
+                    <br>
+                    <div class="row">
+                        <div class="col-3">
+                            <button (click)="toggleEdit()" mat-raised-button class="edit-button rounded p-1" style="background-color: lightskyblue;"><mat-icon>edit</mat-icon> Edit Profile</button>
+                        </div>
+                        <div class="col-4 text-center">
+                            <button (click)="toggleReset()" mat-raised-button class="reset-button rounded p-1" style="background-color: orange;"><mat-icon>lock_reset</mat-icon> Reset Password</button>
+                        </div>
+                        <div class="col-3 text-right">
+                            <button (click)="toggleDelete()" mat-raised-button class="delete-button rounded p-1" style="background-color: red;"><mat-icon>delete</mat-icon> Delete Account</button>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <!-- EDIT FORM -->
+                        <div *ngIf="editBoolean">
+                            <h3 class="text-info" style="border-bottom: 1px solid lightgray;">Edit Profile</h3>
+                            <form [formGroup]="editForm" (ngSubmit)="processEdit()">
+                                <input type="hidden" value="{{ dreamer.email }}" formControlName="email">
+                                <mat-form-field appearance="outline" class="form-field">
+                                    <mat-label>Profile Image URL</mat-label>
+                                    <input type="text" style="padding-top: 10px;" matInput size="50" placeholder ="{{ dreamer.profileImageUrl }}" formControlName="profileImageUrl">
+                                    <mat-icon matSuffix>photo_camera</mat-icon>
+                                </mat-form-field>
+                                <br>
+                                <mat-form-field appearance="outline" class="form-field">
+                                    <mat-label>First Name</mat-label>
+                                    <input type="text" style="padding-top: 10px;" matInput size="50" placeholder="{{ dreamer.firstName }}" formControlName="firstName">
+                                    <mat-icon matSuffix>person</mat-icon>
+                                </mat-form-field>
+                                <br>
+                                <mat-form-field appearance="outline" class="form-field">
+                                    <mat-label>Last Name</mat-label>
+                                    <input type="text" style="padding-top: 10px;" matInput size="50" placeholder="{{ dreamer.lastName }}" formControlName="lastName">
+                                    <mat-icon matSuffix>group</mat-icon>
+                                </mat-form-field>
+                                <div>
+                                    <button type="submit" mat-raised-button class="edit-button rounded p-1" style="background-color: lightskyblue;"><mat-icon>edit</mat-icon>Edit!</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <!-- RESET PASSWORD FORM -->
+                        <div *ngIf="resetBoolean">
+                            <h3 style="color: orange; border-bottom: 1px solid lightgray;">Reset Password</h3>
+                            <form [formGroup]="resetForm" (ngSubmit)="processReset()">
+                                <input type="hidden" value="{{ dreamer.email }}" formControlName="email">
+                                <mat-form-field appearance="outline" class="form-field">
+                                    <mat-label>Current Password</mat-label>
+                                    <input type="password" style="padding-top: 10px;" matInput size="50" placeholder="Enter your current password" formControlName="currentPassword">
+                                    <mat-icon matSuffix>lock</mat-icon>
+                                </mat-form-field>
+                                <br>
+                                <mat-form-field appearance="outline" class="form-field">
+                                    <mat-label>New Password</mat-label>
+                                    <input type="password" style="padding-top: 10px;" matInput size="50" placeholder="Enter your new password" formControlName="newPassword">
+                                    <mat-icon matSuffix>password</mat-icon>
+                                </mat-form-field>
+                                <br>
+                                <mat-form-field appearance="outline" class="form-field">
+                                    <mat-label>Confirm Password</mat-label>
+                                    <input type="password" style="padding-top: 10px;" matInput size="50" placeholder="Re-enter your new password" formControlName="confirmPassword">
+                                    <mat-icon matSuffix>password</mat-icon>
+                                </mat-form-field>
+                                <div>
+                                    <button type="submit" mat-raised-button class="edit-button rounded p-1" style="background-color: orange;"><mat-icon>lock_reset</mat-icon>Reset!</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <!-- DELETE ACCOUNT FORM -->
+                        <div *ngIf="deleteBoolean">
+                            <h3 class="text-danger" style="font-weight: bold; border-bottom: 1px solid lightgray;">Are you sure you want to delete account?</h3>
+                            <p>This action cannot be reversed. If you are very sure, please enter the following:</p>
+                            <span style="font-weight: bold; font-size: 20px;">Delete Dreamer {{ dreamer.firstName }}</span>
+                            <br>
+                            &nbsp;
+                            <form [formGroup]="deleteForm" (ngSubmit)="processDelete()">
+                                <input type="hidden" value="{{ dreamer.email }}" formControlName="email">
+                                <mat-form-field appearance="outline" class="form-field">
+                                    <mat-label>Delete message</mat-label>
+                                    <input type="text" style="padding-top: 10px;" matInput size="50" placeholder="Type here" formControlName="message">
+                                    <mat-icon matSuffix>message</mat-icon>
+                                </mat-form-field>
+                                <br>
+                                <mat-form-field appearance="outline" class="form-field">
+                                    <mat-label>Your Password</mat-label>
+                                    <input type="password" style="padding-top: 10px;" matInput size="50" placeholder="Password" formControlName="password">
+                                    <mat-icon matSuffix>lock</mat-icon>
+                                </mat-form-field>
+                                <div>
+                                    <button type="submit" mat-raised-button class="delete-button rounded p-1" style="background-color: red;"><mat-icon>delete</mat-icon>Delete!</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

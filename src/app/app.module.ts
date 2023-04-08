@@ -15,13 +15,15 @@ import { MaterialModule } from './material.module';
 import { AuthenticationGuard } from './guard/authentication.guard';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { ToastrModule } from 'ngx-toastr';
+import { ProfileComponent } from './components/profile/profile.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     RegisterComponent,
-    DreamerComponent
+    DreamerComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

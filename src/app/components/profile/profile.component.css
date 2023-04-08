@@ -1,0 +1,23 @@
+.img-center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 15px;
+    border: 1px solid black;
+    width: 30%;
+}
+
+.edit-button {
+    width: 150px;
+    border: none;
+}
+
+.reset-button {
+    width: 200px;
+    border: none;
+}
+
+.delete-button {
+    width:180px;
+    border: none;
+}

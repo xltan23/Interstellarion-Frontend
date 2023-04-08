@@ -15,3 +15,16 @@ export interface Dreamer {
     isActive:boolean
     isNotLocked:boolean
 }
+
+export interface PasswordReset {
+    currentPassword:string
+    newPassword:string
+    confirmPassword:string
+    email:string
+}
+
+export interface DeleteAccount {
+    message:string
+    email:string
+    password:string
+}
