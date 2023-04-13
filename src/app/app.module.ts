@@ -16,6 +16,7 @@ import { AuthenticationGuard } from './guard/authentication.guard';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { ToastrModule } from 'ngx-toastr';
 import { ProfileComponent } from './components/profile/profile.component';
+import { PlanetComponent } from './components/planet/planet.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { ProfileComponent } from './components/profile/profile.component';
     LoginComponent,
     RegisterComponent,
     DreamerComponent,
-    ProfileComponent
+    ProfileComponent,
+    PlanetComponent
   ],
   imports: [
     BrowserModule,

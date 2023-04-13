@@ -8,6 +8,7 @@ export interface Dreamer {
     dateOfBirth:Date
     gender:string
     profileImageUrl:string
+    profileImage:File
     lastLoginDateDisplay:Date
     joinDate:Date
     role:string

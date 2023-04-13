@@ -46,6 +46,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
       this.authSvc.register(newDreamer).subscribe({
         next: (response:Dreamer) => {
           this.toastrSvc.success(`The temporary password has been sent to ${newDreamer.email}`)
+          this.router.navigate(['/login'])
           console.log(response)
         },
         error: (errorResponse:HttpErrorResponse) => {

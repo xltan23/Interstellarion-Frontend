@@ -1,0 +1,55 @@
+<nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+    &nbsp; &nbsp; &nbsp; &nbsp; 
+    <a class="navbar-brand" href="/dreamer">Interstellarion</a>
+    
+    <div class="collapse navbar-collapse">
+        <ul class="navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link" href="#"><mat-icon>home</mat-icon></a>
+            </li>
+            <li>
+                <a class="nav-link" href="/planet"><mat-icon>rocket_launch</mat-icon></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#"><mat-icon>shopping_cart</mat-icon></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/profile"><mat-icon>account_circle</mat-icon></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-danger" href="#" (click)="onLogout()"><mat-icon>logout</mat-icon></a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Mass</th>
+                <th>Radius</th>
+                <th>Period</th>
+                <th>Semi-Major Axis</th>
+                <th>Temperature</th>
+                <th>Distance (Light Years)</th>
+                <th>Host Star mass</th>
+                <th>Host Star temperature</th>
+            </tr>
+        </thead>
+        <tbody *ngFor="let planet of planetList">
+            <tr>
+                <td>{{ planet.name }}</td>
+                <td>{{ planet.mass }}</td>
+                <td>{{ planet.radius }}</td>
+                <td>{{ planet.period }}</td>
+                <td>{{ planet.semi_major_axis }}</td>
+                <td>{{ planet.temperature }}</td>
+                <td>{{ planet.distance_light_year }}</td>
+                <td>{{ planet.host_star_mass }}</td>
+                <td>{{ planet.host_star_temperature }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

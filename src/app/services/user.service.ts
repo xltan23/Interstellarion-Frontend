@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { firstValueFrom } from "rxjs";
+import { Observable, firstValueFrom } from "rxjs";
 import { environment } from "../environments/environment";
 import { DeleteAccount, Dreamer, PasswordReset } from "../models/dreamer";
 import { CustomHttpResponse } from "../models/http-response";
@@ -15,8 +15,19 @@ export class UserService {
     // CONSTRUCTOR
     constructor(private http:HttpClient) {}
 
+    getProfileImage(dreamer:Dreamer): Promise<any> {
+        const dreamerId = dreamer.dreamerId
+        console.log(dreamerId)
+        return firstValueFrom(this.http.get(`${this.host}/dreamer/image/${dreamerId}`, {responseType: 'text'}))
+    }
+
     editDreamer(dreamer:Dreamer): Promise<CustomHttpResponse> {
-        return firstValueFrom(this.http.put<CustomHttpResponse>(`${this.host}/dreamer/edit`, dreamer))
+        const formData = new FormData()
+        formData.set('email', dreamer.email)
+        formData.set('firstName', dreamer.firstName)
+        formData.set('lastName', dreamer.lastName)
+        formData.set('profileImage',dreamer.profileImage)
+        return firstValueFrom(this.http.put<CustomHttpResponse>(`${this.host}/dreamer/edit`, formData))
     }
 
     changePassword(passwordReset:PasswordReset): Promise<CustomHttpResponse> {

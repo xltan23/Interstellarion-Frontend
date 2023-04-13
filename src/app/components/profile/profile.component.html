@@ -29,11 +29,12 @@
             <div class="card-group mb-0 mt-5">
                 <!-- DREAMER PROFILE -->
                 <div class="card col-2 p-3" style="border: none; text-align: center; background-color: lightcyan;">
-                    <img class="rounded-circle img-center" src="{{ dreamer.profileImageUrl }}"  width="150">
+                    <img class="rounded-circle img-center" [src]="imageURL"  width="300">
+                    <!-- <img class="rounded-circle img-center" src="{{ dreamer.profileImageUrl }}"  width="150"> -->
                     <ul class="list-unstyled">
                         <li class="name"> 
                             <mat-icon>person</mat-icon> &nbsp; &nbsp;
-                            <span style="font-weight: bold; font-size: 20px;">{{ dreamer.firstName }} {{ dreamer.lastName }}</span> &nbsp; <span class="rounded bg-info p-1 text-white" style="font-size: small;">{{ dreamer.role }}</span>
+                            <span style="font-weight: bold; font-size: 20px;">{{ firstName }} {{ lastName }}</span> &nbsp; <span class="rounded bg-info p-1 text-white" style="font-size: small;">{{ dreamer.role }}</span>
                         </li>
                         <br>
                         <li class="id">
@@ -71,13 +72,13 @@
                     <br>
                     <div class="row">
                         <div class="col-3">
-                            <button (click)="toggleEdit()" mat-raised-button class="edit-button rounded p-1" style="background-color: lightskyblue;"><mat-icon>edit</mat-icon> Edit Profile</button>
+                            <button (click)="toggleEdit()" mat-raised-button class="edit-button rounded p-2" style="background-color: lightskyblue;"><mat-icon>edit</mat-icon> Edit Profile</button>
                         </div>
                         <div class="col-4 text-center">
-                            <button (click)="toggleReset()" mat-raised-button class="reset-button rounded p-1" style="background-color: orange;"><mat-icon>lock_reset</mat-icon> Reset Password</button>
+                            <button (click)="toggleReset()" mat-raised-button class="reset-button rounded p-2" style="background-color: orange;"><mat-icon>lock_reset</mat-icon> Reset Password</button>
                         </div>
                         <div class="col-3 text-right">
-                            <button (click)="toggleDelete()" mat-raised-button class="delete-button rounded p-1" style="background-color: red;"><mat-icon>delete</mat-icon> Delete Account</button>
+                            <button (click)="toggleDelete()" mat-raised-button class="delete-button rounded p-2" style="background-color: red;"><mat-icon>delete</mat-icon> Delete Account</button>
                         </div>
                     </div>
                     <br>
@@ -87,11 +88,10 @@
                             <h3 class="text-info" style="border-bottom: 1px solid lightgray;">Edit Profile</h3>
                             <form [formGroup]="editForm" (ngSubmit)="processEdit()">
                                 <input type="hidden" value="{{ dreamer.email }}" formControlName="email">
-                                <mat-form-field appearance="outline" class="form-field">
-                                    <mat-label>Profile Image URL</mat-label>
-                                    <input type="text" style="padding-top: 10px;" matInput size="50" placeholder ="{{ dreamer.profileImageUrl }}" formControlName="profileImageUrl">
-                                    <mat-icon matSuffix>photo_camera</mat-icon>
-                                </mat-form-field>
+                                <mat-icon>photo_camera</mat-icon> &nbsp; &nbsp; 
+                                <mat-label>Profile Image</mat-label> &nbsp; &nbsp; 
+                                <input type="file" size="50" formControlName="profileImage" #image>
+                                <br>
                                 <br>
                                 <mat-form-field appearance="outline" class="form-field">
                                     <mat-label>First Name</mat-label>

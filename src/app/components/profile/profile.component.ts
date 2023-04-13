@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { DeleteAccount, Dreamer, PasswordReset } from 'src/app/models/dreamer';
@@ -13,8 +14,14 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class ProfileComponent implements OnInit {
 
+  @ViewChild('image')
+  profileImage!:ElementRef
+
   dreamer!:Dreamer
-  
+  imageURL!:SafeUrl
+  firstName!:string
+  lastName!:string
+
   editBoolean:boolean = false
   resetBoolean:boolean = false
   deleteBoolean:boolean = false
@@ -24,13 +31,31 @@ export class ProfileComponent implements OnInit {
   deleteForm!:FormGroup
 
   constructor(private router:Router, private authSvc:AuthenticationService, private userSvc:UserService,
-              private toastrSvc:ToastrService, private fb:FormBuilder) {}
+              private toastrSvc:ToastrService, private fb:FormBuilder, private sanitizer:DomSanitizer) {}
 
   ngOnInit(): void {
       this.dreamer = this.authSvc.getDreamerFromLocalCache()
+      this.getProfileImage();
       this.editForm = this.createEditForm()
       this.resetForm = this.createResetForm()
       this.deleteForm = this.createDeleteForm()
+  }
+
+  getProfileImage() {
+    this.userSvc.getProfileImage(this.dreamer)
+                  .then((response) => {
+                      if (response == "") {
+                        this.imageURL = this.dreamer.profileImageUrl
+                        this.toastrSvc.info("Your profile image has not been set. You may set your personal profile image in the 'Edit Profile' tab")
+                      } else {
+                        this.imageURL = this.sanitizer.bypassSecurityTrustResourceUrl(`data:image/png;base64,${response}`)
+                      }
+                      console.log(this.imageURL)
+                  })
+                  .catch((errorResponse) => {
+                      this.imageURL = this.dreamer.profileImageUrl
+                      this.toastrSvc.error("Unable to retrieve profile image. Reverting back to temporary profile picture.")
+                  })
   }
 
   onLogout(): void {
@@ -65,6 +90,9 @@ export class ProfileComponent implements OnInit {
 
   processEdit() {
     const dreamer = this.editForm.value as Dreamer
+    this.firstName = dreamer.firstName
+    this.lastName = dreamer.lastName
+    dreamer.profileImage = this.profileImage.nativeElement.files[0]
     this.userSvc.editDreamer(dreamer)
                   .then((response) => {
                     this.toastrSvc.success(response.message)
@@ -115,7 +143,7 @@ export class ProfileComponent implements OnInit {
     return this.fb.group({
       firstName: this.fb.control(this.dreamer.firstName, [Validators.required]),
       lastName: this.fb.control(this.dreamer.lastName, [Validators.required]),
-      profileImageUrl: this.fb.control(this.dreamer.profileImageUrl, [Validators.required]),
+      profileImage: this.fb.control('', [Validators.required]),
       email: this.fb.control(this.dreamer.email)
     })
   }
