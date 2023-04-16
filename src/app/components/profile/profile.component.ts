@@ -4,6 +4,7 @@ import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { DeleteAccount, Dreamer, PasswordReset } from 'src/app/models/dreamer';
+import { PlanetSearch } from 'src/app/models/planet';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { UserService } from 'src/app/services/user.service';
 
@@ -12,6 +13,12 @@ import { UserService } from 'src/app/services/user.service';
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css']
 })
+
+// DREAMER PROFILE
+// NAVIGATION BAR
+// EDIT FEATURE
+// CHANGE PASSWORD FEATURE
+// DELETE FEATURE
 export class ProfileComponent implements OnInit {
 
   @ViewChild('image')
@@ -26,6 +33,7 @@ export class ProfileComponent implements OnInit {
   resetBoolean:boolean = false
   deleteBoolean:boolean = false
 
+  searchForm!:FormGroup
   editForm!:FormGroup
   resetForm!:FormGroup
   deleteForm!:FormGroup
@@ -36,6 +44,7 @@ export class ProfileComponent implements OnInit {
   ngOnInit(): void {
       this.dreamer = this.authSvc.getDreamerFromLocalCache()
       this.getProfileImage();
+      this.searchForm = this.createSearchForm()
       this.editForm = this.createEditForm()
       this.resetForm = this.createResetForm()
       this.deleteForm = this.createDeleteForm()
@@ -88,6 +97,11 @@ export class ProfileComponent implements OnInit {
     }
   }
 
+  processSearch() {
+    const planetName = this.searchForm.value as PlanetSearch
+    this.router.navigate([`/planets/${planetName.searchTerm}`])
+  }
+
   processEdit() {
     const dreamer = this.editForm.value as Dreamer
     this.firstName = dreamer.firstName
@@ -137,6 +151,12 @@ export class ProfileComponent implements OnInit {
                       this.toastrSvc.error(errorResponse.error.message)
                     })
     }
+  }
+
+  createSearchForm():FormGroup {
+    return this.fb.group({
+      searchTerm:this.fb.control('', [Validators.required])
+    })
   }
 
   createEditForm():FormGroup {

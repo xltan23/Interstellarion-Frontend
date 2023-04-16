@@ -17,6 +17,8 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { ToastrModule } from 'ngx-toastr';
 import { ProfileComponent } from './components/profile/profile.component';
 import { PlanetComponent } from './components/planet/planet.component';
+import { PlanetService } from './services/planet.service';
+import { PlanetProfileComponent } from './components/planet-profile/planet-profile.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,8 @@ import { PlanetComponent } from './components/planet/planet.component';
     RegisterComponent,
     DreamerComponent,
     ProfileComponent,
-    PlanetComponent
+    PlanetComponent,
+    PlanetProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +39,7 @@ import { PlanetComponent } from './components/planet/planet.component';
     MaterialModule,
     ToastrModule.forRoot()
   ],
-  providers: [AuthenticationGuard, AuthenticationService, UserService,
+  providers: [AuthenticationGuard, AuthenticationService, UserService, PlanetService,
   {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}],
   bootstrap: [AppComponent]
 })

@@ -11,3 +11,13 @@
     height: 65px;
     width: 50px;
 }
+
+.title-box {
+    display: flex;
+    justify-content: center;
+}
+
+.result-box {
+    display: flex;
+    justify-content: space-evenly;
+}

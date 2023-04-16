@@ -1,0 +1,40 @@
+.space-end-end {
+    justify-content: space-between;
+}
+
+.search-form {
+    background-color: aliceblue;
+    height: 65px;
+}
+
+.search-button {
+    height: 65px;
+    width: 50px;
+}
+
+.filter-nav {
+    background-color: plum;
+}
+
+.filter-span {
+    margin: auto;
+    font-size: large;
+    font-weight: 600;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.filter-box {
+    background-color: lavender;
+    font-weight: 500;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.title-box {
+    display: flex;
+    justify-content: center;
+}
+
+.result-box {
+    display: flex;
+    justify-content: space-evenly;
+}

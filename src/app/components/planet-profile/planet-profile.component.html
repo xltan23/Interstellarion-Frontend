@@ -5,7 +5,7 @@
     <div class="collapse navbar-collapse space-end-end">
         <ul class="navbar-nav">
             <li class="nav-item active">
-                <a class="nav-link" href="/dreamer"><mat-icon>home</mat-icon></a>
+                <a class="nav-link" href="#"><mat-icon>home</mat-icon></a>
             </li>
             <li>
                 <a class="nav-link text-primary" href="/planets"><mat-icon>rocket_launch</mat-icon></a>
@@ -37,37 +37,11 @@
     <mat-icon>brightness_5</mat-icon>&nbsp;&nbsp; Star Type &nbsp;|&nbsp; <mat-icon>hourglass_bottom</mat-icon>&nbsp;&nbsp; Travel Time &nbsp;|&nbsp; <mat-icon>paid</mat-icon>&nbsp;&nbsp; Cost
 </marquee>
 
-<nav class="navbar navbar-dark filter-nav">
-    <div class="filter-span">
-        <mat-icon>filter_alt</mat-icon>
-        <span>Advanced Filter</span>
-    </div>
-    <div class="search-form rounded filter-box">
-        <form [formGroup]="advancedForm" (ngSubmit)="processAdvanced()">
-            <mat-icon></mat-icon>
-            <mat-slider min="0" max="30" step="0.1" thumbLabel discrete [displayWith]="formatLabel">
-                <mat-label>Mass of Planet (In Jupiter's mass)</mat-label>
-                <input matSliderStartThumb formControlName="min_mass">
-                <input matSliderEndThumb formControlName="max_mass">
-            </mat-slider>
-            <mat-icon></mat-icon>
-            <mat-slider min="0" max="50" step="0.1" thumbLabel discrete [displayWith]="formatLabel">
-                <mat-label>Planet's distance from host star (In Astro Units)</mat-label>
-                <input matSliderStartThumb formControlName="min_semi_major_axis">
-                <input matSliderEndThumb formControlName="max_semi_major_axis">
-            </mat-slider>
-            <mat-icon></mat-icon>
-            <mat-slider min="1" max="100" step="1" thumbLabel discrete [displayWith]="formatLabel">
-                <mat-label>Max distance from Earth (In Light Years)</mat-label>
-                <input matSliderThumb formControlName="max_distance_light_year">
-            </mat-slider>
-            <mat-icon></mat-icon>
-            <button class="bg-danger text-white search-button" mat-raised-button matSuffix type="submit"><mat-icon>search</mat-icon></button>
-        </form>
-    </div>
-</nav>
+<div *ngIf="notFoundDisplay">
+    {{ notFoundMessage }}
+</div>
 
-<div class="py-3">
+<div *ngIf="listFoundDisplay">
     <div class="title-box">
         <h2>Search Results</h2>
     </div>
@@ -85,4 +59,35 @@
             </div>
         </a>
     </mat-nav-list>
+</div>
+
+<div *ngIf="planetFoundDisplay">
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Mass</th>
+                <th>Radius</th>
+                <th>Period</th>
+                <th>Semi-Major Axis</th>
+                <th>Temperature</th>
+                <th>Distance (Light Years)</th>
+                <th>Host Star mass</th>
+                <th>Host Star temperature</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{ soloPlanet.name }}</td>
+                <td>{{ soloPlanet.mass }}</td>
+                <td>{{ soloPlanet.radius }}</td>
+                <td>{{ soloPlanet.period }}</td>
+                <td>{{ soloPlanet.semi_major_axis }}</td>
+                <td>{{ soloPlanet.temperature }}</td>
+                <td>{{ soloPlanet.distance_light_year }}</td>
+                <td>{{ soloPlanet.host_star_mass }}</td>
+                <td>{{ soloPlanet.host_star_temperature }}</td>
+            </tr>
+        </tbody>
+    </table>
 </div>

@@ -14,12 +14,15 @@ export class PlanetService {
     // CONSTRUCTOR
     constructor(private http:HttpClient) {}
 
-    getPlanets(): Promise<Planet[]> {
-        return firstValueFrom(this.http.get<Planet[]>(`${this.host}/planets/all`))
+    getDefaultPlanets(): Promise<Planet[]> {
+        return firstValueFrom(this.http.get<Planet[]>(`${this.host}/planets/default`))
     }
 
-    getPlanet(planetSearch:PlanetSearch): Promise<Planet[]> {
-        const planetName = planetSearch.name
-        return firstValueFrom(this.http.get<Planet[]>(`${this.host}/planets/${planetName}`))
+    getPlanetsByName(name:string): Promise<Planet[]> {
+        return firstValueFrom(this.http.get<Planet[]>(`${this.host}/planets/${name}`))
+    }
+
+    postFilterGetPlanets(planetSearch:PlanetSearch): Promise<Planet[]> {
+        return firstValueFrom(this.http.post<Planet[]>(`${this.host}/planets/filter`, planetSearch))
     }
 }

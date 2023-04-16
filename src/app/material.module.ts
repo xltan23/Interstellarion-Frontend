@@ -40,7 +40,7 @@ import { MatTreeModule } from '@angular/material/tree';
 const matModules:any[] = [
   MatToolbarModule, MatFormFieldModule, MatInputModule,
   MatIconModule, MatDatepickerModule, MatNativeDateModule, MatButtonModule,
-  MatRadioModule, MatMenuModule
+  MatRadioModule, MatMenuModule, MatListModule, MatSliderModule
 ]
 
 @NgModule({

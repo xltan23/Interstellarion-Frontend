@@ -1,3 +1,17 @@
+.space-end-end {
+    justify-content: space-between;
+}
+
+.search-form {
+    background-color: aliceblue;
+    height: 65px;
+}
+
+.search-button {
+    height: 65px;
+    width: 50px;
+}
+
 .img-center {
     display: block;
     margin-left: auto;
