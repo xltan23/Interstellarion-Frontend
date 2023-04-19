@@ -2,7 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { firstValueFrom } from "rxjs";
 import { environment } from "../environments/environment";
-import { Planet, PlanetSearch } from "../models/planet";
+import { Apod, Planet, PlanetSearch } from "../models/planet";
 
 @Injectable({
     providedIn: 'root'
@@ -13,6 +13,10 @@ export class PlanetService {
 
     // CONSTRUCTOR
     constructor(private http:HttpClient) {}
+
+    getApod(): Promise<Apod> {
+        return firstValueFrom(this.http.get<Apod>(`${this.host}/planets/apod`))
+    }
 
     getDefaultPlanets(): Promise<Planet[]> {
         return firstValueFrom(this.http.get<Planet[]>(`${this.host}/planets/default`))

@@ -32,33 +32,30 @@
     </div>
 </nav>
 
-<marquee behavior="" direction="">
-    <mat-icon>keyboard_double_arrow_down</mat-icon>&nbsp;&nbsp; Gravity &nbsp;|&nbsp; <mat-icon>hdr_weak</mat-icon>&nbsp;&nbsp; Planet-Host Star Distance &nbsp;|&nbsp; <mat-icon>solar_power</mat-icon>&nbsp;&nbsp; Solar Insolation &nbsp;|&nbsp; 
-    <mat-icon>brightness_5</mat-icon>&nbsp;&nbsp; Star Type &nbsp;|&nbsp; <mat-icon>hourglass_bottom</mat-icon>&nbsp;&nbsp; Travel Time &nbsp;|&nbsp; <mat-icon>paid</mat-icon>&nbsp;&nbsp; Cost
-</marquee>
+
 
 <nav class="navbar navbar-dark filter-nav">
     <div class="filter-span">
-        <mat-icon>filter_alt</mat-icon>
+        <mat-icon class="mat-icon-format">filter_alt</mat-icon>
         <span>Advanced Filter</span>
     </div>
     <div class="search-form rounded filter-box">
         <form [formGroup]="advancedForm" (ngSubmit)="processAdvanced()">
             <mat-icon></mat-icon>
             <mat-slider min="0" max="30" step="0.1" thumbLabel discrete [displayWith]="formatLabel">
-                <mat-label>Mass of Planet (In Jupiter's mass)</mat-label>
+                <mat-label>Mass of Planet <span class="text-muted" style="font-size: 10px;">(In Jupiter's mass)</span></mat-label>
                 <input matSliderStartThumb formControlName="min_mass">
                 <input matSliderEndThumb formControlName="max_mass">
             </mat-slider>
             <mat-icon></mat-icon>
             <mat-slider min="0" max="50" step="0.1" thumbLabel discrete [displayWith]="formatLabel">
-                <mat-label>Planet's distance from host star (In Astro Units)</mat-label>
+                <mat-label>Distance from Parent Star <span class="text-muted" style="font-size: 10px;">(In Astronomical Units)</span></mat-label>
                 <input matSliderStartThumb formControlName="min_semi_major_axis">
                 <input matSliderEndThumb formControlName="max_semi_major_axis">
             </mat-slider>
             <mat-icon></mat-icon>
             <mat-slider min="1" max="100" step="1" thumbLabel discrete [displayWith]="formatLabel">
-                <mat-label>Max distance from Earth (In Light Years)</mat-label>
+                <mat-label>Max distance from Earth <span class="text-muted" style="font-size: 10px;">(In Light Years)</span></mat-label>
                 <input matSliderThumb formControlName="max_distance_light_year">
             </mat-slider>
             <mat-icon></mat-icon>
@@ -67,22 +64,34 @@
     </div>
 </nav>
 
+<marquee behavior="" direction="">
+    In Partnership <mat-icon>handshake</mat-icon> with NinjaAPI 
+</marquee>
+
 <div class="py-3">
-    <div class="title-box">
+    <div class="title-box rounded">
         <h2>Search Results</h2>
     </div>
-    <mat-nav-list>
-        <a mat-list-item *ngFor="let planet of planetList" [routerLink]="['/planets',planet.name]">
-            <div class="result-box">
-                <img src="https://robohash.org/bond" width="40px">
-                <span style="font-weight: bold; font-family:'Courier New', Courier, monospace">{{ planet.name }}</span> &nbsp;
-                <span style="font-size: small;"><mat-icon>keyboard_double_arrow_down</mat-icon>&nbsp;{{ planet.gravity }}m/s<sup>2</sup></span>
-                <span style="font-size: small;"><mat-icon>hdr_weak</mat-icon>&nbsp;{{ planet.semi_major_axis }} AU</span>
-                <span style="font-size: small;"><mat-icon>solar_power</mat-icon>&nbsp;{{ planet.solar_insolation }}W/m<sup>2</sup></span>
-                <span style="font-size: small;"><mat-icon>brightness_5</mat-icon>&nbsp;{{ planet.star_type }}</span>
-                <span style="font-size: small;"><mat-icon>hourglass_bottom</mat-icon>&nbsp;{{ planet.travel_time }} Years</span>
-                <span style="font-size: small;"><mat-icon>paid</mat-icon>&nbsp;S${{ planet.cost }}</span>
-            </div>
-        </a>
-    </mat-nav-list>
+    <table width="100%" style="margin: 0px;" class="table table-hover table-striped">
+        <thead>
+            <td></td>
+            <td><mat-icon class="mat-icon-format">public</mat-icon> Planet</td>
+            <td><mat-icon class="mat-icon-format">keyboard_double_arrow_down</mat-icon> Gravity</td>
+            <td><mat-icon class="mat-icon-format">hdr_weak</mat-icon>&nbsp;&nbsp; Distance from Parent Star</td>
+            <td><mat-icon class="mat-icon-format">brightness_5</mat-icon>&nbsp;&nbsp; Host Star Type</td>
+            <td><mat-icon class="mat-icon-format">hourglass_bottom</mat-icon>&nbsp;&nbsp; Est. Travel Time</td>
+            <td><mat-icon class="mat-icon-format">paid</mat-icon>&nbsp;&nbsp; Cost of Travel</td>
+        </thead>
+        <tbody>
+            <tr *ngFor="let planet of planetList" [routerLink]="['/planets',planet.name]">
+                <td><img src="{{planet.thumbnailUrl}}" class="rounded-circle"></td>
+                <td><span style="font-weight: bold; font-family:'Courier New', Courier, monospace">{{ planet.name }}</span></td>
+                <td><span>{{ planet.gravity }}m/s<sup>2</sup></span></td>
+                <td><span>{{ planet.semi_major_axis }} AU</span></td>
+                <td><span>{{ planet.star_type }}</span></td>
+                <td><span>{{ planet.travel_time }} Years</span></td>
+                <td><span>S${{ planet.cost }}</span></td>
+            </tr>
+        </tbody>
+    </table>
 </div>

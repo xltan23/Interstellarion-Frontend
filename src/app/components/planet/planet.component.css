@@ -13,7 +13,7 @@
 }
 
 .filter-nav {
-    background-color: plum;
+    background-color: lightsteelblue;
 }
 
 .filter-span {
@@ -32,9 +32,21 @@
 .title-box {
     display: flex;
     justify-content: center;
+    border: 1px solid gray;
+    vertical-align: middle;
 }
 
-.result-box {
-    display: flex;
-    justify-content: space-evenly;
+thead {
+    padding-bottom: 50px;
+}
+
+th, td {
+    height: 50px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.mat-icon-format {
+    margin-right: 10px;
+    overflow: visible;
 }

@@ -19,6 +19,8 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { PlanetComponent } from './components/planet/planet.component';
 import { PlanetService } from './services/planet.service';
 import { PlanetProfileComponent } from './components/planet-profile/planet-profile.component';
+import { AdminComponent } from './components/admin/admin.component';
+import { AdminService } from './services/admin.service';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,8 @@ import { PlanetProfileComponent } from './components/planet-profile/planet-profi
     DreamerComponent,
     ProfileComponent,
     PlanetComponent,
-    PlanetProfileComponent
+    PlanetProfileComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,
@@ -39,7 +42,7 @@ import { PlanetProfileComponent } from './components/planet-profile/planet-profi
     MaterialModule,
     ToastrModule.forRoot()
   ],
-  providers: [AuthenticationGuard, AuthenticationService, UserService, PlanetService,
+  providers: [AuthenticationGuard, AuthenticationService, UserService, PlanetService, AdminService,
   {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}],
   bootstrap: [AppComponent]
 })

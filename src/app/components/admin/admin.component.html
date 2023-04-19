@@ -1,0 +1,26 @@
+<div class="container">
+    <div class="row justify-content-center mt-3">
+        <h2>Update Planet Profile</h2>
+        <form [formGroup]="updateForm" (ngSubmit)="processUpdate()">
+            <mat-form-field appearance="outline" class="form-field">
+                <mat-label>Planet Name</mat-label>
+                <input type="text" style="padding-top: 10px;" matInput size="50" placeholder="Type here" formControlName="name">
+            </mat-form-field>
+            <br>
+            <mat-form-field appearance="outline" class="form-field">
+                <mat-label>Description</mat-label>
+                <textarea style="padding-top: 10px;" matInput size="50" placeholder="Type here" formControlName="description"></textarea>
+            </mat-form-field>
+            <br><br>
+            <mat-icon>photo_camera</mat-icon> &nbsp; &nbsp; 
+            <mat-label>Planet Thumbnail</mat-label> &nbsp; &nbsp; 
+            <input type="file" size="50" formControlName="thumbnail" #imageT>
+            <br><br>
+            <mat-icon>photo_camera</mat-icon> &nbsp; &nbsp; 
+            <mat-label>Planet Cover</mat-label> &nbsp; &nbsp; 
+            <input type="file" size="50" formControlName="cover" #imageC>
+            <br>
+            <button mat-raised-button type="submit" [disabled]="updateForm.invalid">Update!</button>
+        </form>
+    </div>
+</div>

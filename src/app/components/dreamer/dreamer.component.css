@@ -11,3 +11,21 @@
     height: 65px;
     width: 50px;
 }
+
+.title-box {
+    display: flex;
+    justify-content: space-evenly;
+    font-size: large;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    background-color: lightsteelblue;
+    opacity: 80%;
+}
+
+.explanation-box {
+    position: fixed;
+    bottom: 0px;
+    font-size: small;
+    font-style: italic;
+    background-color: whitesmoke;
+    opacity: 70%;
+}

@@ -9,7 +9,6 @@ export interface Planet {
     host_star_mass:number
     host_star_temperature:number
     gravity:number
-    solar_insolation:number
     star_type:string
     travel_time:number
     cost:number
@@ -25,4 +24,20 @@ export interface PlanetSearch {
     min_semi_major_axis:number
     max_semi_major_axis:number
     max_distance_light_year:number
+}
+
+export interface PlanetUpdate {
+    name:string
+    description:string
+    thumbnail:File
+    cover:File
+}
+
+export class Apod {
+    constructor(
+        public date:string,
+        public explanation:string,
+        public hdurl:string,
+        public title:string
+    ) {}
 }

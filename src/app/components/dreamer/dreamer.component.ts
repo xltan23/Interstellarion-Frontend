@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Dreamer } from 'src/app/models/dreamer';
-import { PlanetSearch } from 'src/app/models/planet';
+import { Apod, PlanetSearch } from 'src/app/models/planet';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { PlanetService } from 'src/app/services/planet.service';
 
@@ -19,7 +19,9 @@ import { PlanetService } from 'src/app/services/planet.service';
 export class DreamerComponent implements OnInit {
 
   dreamer!:Dreamer
+  apod = new Apod((new Date()).toLocaleDateString(),"","","No Astronomy Picture Of Day Available")
   searchForm!:FormGroup
+  apodBoolean:boolean = false;
 
   constructor(private router:Router, private authSvc:AuthenticationService, private planetSvc:PlanetService, 
               private fb:FormBuilder, private toastrSvc:ToastrService) {}
@@ -27,6 +29,7 @@ export class DreamerComponent implements OnInit {
   ngOnInit(): void {
       this.dreamer = this.authSvc.getDreamerFromLocalCache();
       this.searchForm = this.createSearchForm()
+      this.getApod()
   }
 
   onLogout(): void {
@@ -44,5 +47,16 @@ export class DreamerComponent implements OnInit {
     return this.fb.group({
       searchTerm:this.fb.control('', [Validators.required])
     })
+  }
+
+    getApod() {
+    this.planetSvc.getApod()
+                    .then((response:Apod) => {
+                      this.apod = response
+                      this.apodBoolean = true
+                    })
+                    .catch((errorResponse) => {
+                      this.toastrSvc.error(errorResponse.error.message)
+                    })
   }
 }

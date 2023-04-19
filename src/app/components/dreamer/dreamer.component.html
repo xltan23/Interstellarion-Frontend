@@ -31,3 +31,15 @@
         </div>
     </div>
 </nav>
+<marquee behavior="" direction="">
+    In Partnership <mat-icon>handshake</mat-icon> with NASA API 
+</marquee>
+<body *ngIf="apodBoolean" background="{{apod.hdurl}}" style="background-size: cover; background-blend-mode: overlay; background-color: rgba(255, 255, 255, 0.486)">
+    <div class="title-box">
+        <span>Coming soon: &nbsp;{{apod.title}}</span>
+        <span>{{apod.date}}</span>
+    </div>
+    <div class="explanation-box">
+        <span>{{apod.explanation}}</span>
+    </div>
+</body>

@@ -33,35 +33,45 @@
 </nav>
 
 <marquee behavior="" direction="">
-    <mat-icon>keyboard_double_arrow_down</mat-icon>&nbsp;&nbsp; Gravity &nbsp;|&nbsp; <mat-icon>hdr_weak</mat-icon>&nbsp;&nbsp; Planet-Host Star Distance &nbsp;|&nbsp; <mat-icon>solar_power</mat-icon>&nbsp;&nbsp; Solar Insolation &nbsp;|&nbsp; 
-    <mat-icon>brightness_5</mat-icon>&nbsp;&nbsp; Star Type &nbsp;|&nbsp; <mat-icon>hourglass_bottom</mat-icon>&nbsp;&nbsp; Travel Time &nbsp;|&nbsp; <mat-icon>paid</mat-icon>&nbsp;&nbsp; Cost
+    In Partnership <mat-icon>handshake</mat-icon> with NinjaAPI 
 </marquee>
 
 <div *ngIf="notFoundDisplay">
     {{ notFoundMessage }}
 </div>
 
-<div *ngIf="listFoundDisplay">
-    <div class="title-box">
-        <h2>Search Results</h2>
+<body *ngIf="listFoundDisplay">
+    <div>
+        <div class="title-box rounded">
+            <h2>Search Results</h2>
+        </div>
+        <table width="100%" style="margin: 0px;" class="table table-hover table-striped">
+            <thead>
+                <td></td>
+                <td><mat-icon class="mat-icon-format">public</mat-icon> Planet</td>
+                <td><mat-icon class="mat-icon-format">keyboard_double_arrow_down</mat-icon> Gravity</td>
+                <td><mat-icon class="mat-icon-format">hdr_weak</mat-icon>&nbsp;&nbsp; Distance from Parent Star</td>
+                <td><mat-icon class="mat-icon-format">brightness_5</mat-icon>&nbsp;&nbsp; Host Star Type</td>
+                <td><mat-icon class="mat-icon-format">hourglass_bottom</mat-icon>&nbsp;&nbsp; Est. Travel Time</td>
+                <td><mat-icon class="mat-icon-format">paid</mat-icon>&nbsp;&nbsp; Cost of Travel</td>
+            </thead>
+            <tbody>
+                <tr *ngFor="let planet of planetList" [routerLink]="['/planets',planet.name]">
+                    <td><img src="{{planet.thumbnailUrl}}" class="rounded-circle"></td>
+                    <td><span style="font-weight: bold; font-family:'Courier New', Courier, monospace">{{ planet.name }}</span></td>
+                    <td><span>{{ planet.gravity }}m/s<sup>2</sup></span></td>
+                    <td><span>{{ planet.semi_major_axis }} AU</span></td>
+                    <td><span>{{ planet.star_type }}</span></td>
+                    <td><span>{{ planet.travel_time }} Years</span></td>
+                    <td><span>S${{ planet.cost }}</span></td>
+                </tr>
+            </tbody>
+        </table>
     </div>
-    <mat-nav-list>
-        <a mat-list-item *ngFor="let planet of planetList" [routerLink]="['/planets',planet.name]">
-            <div class="result-box">
-                <img src="https://robohash.org/bond" width="40px">
-                <span style="font-weight: bold; font-family:'Courier New', Courier, monospace">{{ planet.name }}</span> &nbsp;
-                <span style="font-size: small;"><mat-icon>keyboard_double_arrow_down</mat-icon>&nbsp;{{ planet.gravity }}m/s<sup>2</sup></span>
-                <span style="font-size: small;"><mat-icon>hdr_weak</mat-icon>&nbsp;{{ planet.semi_major_axis }} AU</span>
-                <span style="font-size: small;"><mat-icon>solar_power</mat-icon>&nbsp;{{ planet.solar_insolation }}W/m<sup>2</sup></span>
-                <span style="font-size: small;"><mat-icon>brightness_5</mat-icon>&nbsp;{{ planet.star_type }}</span>
-                <span style="font-size: small;"><mat-icon>hourglass_bottom</mat-icon>&nbsp;{{ planet.travel_time }} Years</span>
-                <span style="font-size: small;"><mat-icon>paid</mat-icon>&nbsp;S${{ planet.cost }}</span>
-            </div>
-        </a>
-    </mat-nav-list>
-</div>
+</body>
 
-<div *ngIf="planetFoundDisplay">
+<body *ngIf="planetFoundDisplay" background="{{soloPlanet.coverUrl}}" style="background-size: cover; background-blend-mode: overlay; background-color: rgba(255, 255, 255, 0.486)">
+    <div *ngIf="planetFoundDisplay">
     <table>
         <thead>
             <tr>
@@ -90,4 +100,9 @@
             </tr>
         </tbody>
     </table>
-</div>
+    <div>
+        {{ soloPlanet.description }}
+        <img src="{{soloPlanet.thumbnailUrl}}" width="50px">
+    </div>
+    </div>
+</body>
