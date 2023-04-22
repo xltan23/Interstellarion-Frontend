@@ -86,7 +86,7 @@
         </thead>
         <tbody>
             <tr *ngFor="let planet of planetList" [routerLink]="['/planets',planet.name]">
-                <td><img src="{{planet.thumbnailUrl}}" class="rounded-circle"></td>
+                <td><img src="{{planet.thumbnailUrl}}" class="rounded-circle" width="30px"></td>
                 <td><span style="font-weight: bold; font-family:'Courier New', Courier, monospace">{{ planet.name }}</span></td>
                 <td><span>{{ planet.gravity }}m/s<sup>2</sup></span></td>
                 <td><span>{{ planet.semi_major_axis }} AU</span></td>

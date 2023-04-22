@@ -21,5 +21,4 @@ export class BookingService {
     getTemporaryBooking(dreamerId:string): Promise<Booking> {
         return firstValueFrom(this.http.get<Booking>(`${this.host}/travel/${dreamerId}`))
     }
-
 }

@@ -43,3 +43,30 @@ th, td {
     margin-right: 10px;
     overflow: visible;
 }
+
+.profile-box {
+    text-align: center;
+    background-color: transparent;
+}
+
+.img-center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.space-even {
+    display: flex;
+    justify-content: space-evenly;
+    background-color: antiquewhite;
+}
+
+.button-center {
+    display: flex;
+    justify-content: center;
+}
+
+.booking-box {
+    background-color: antiquewhite;
+    opacity: 80%;
+}

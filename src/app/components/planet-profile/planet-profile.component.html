@@ -74,53 +74,89 @@
 </body>
 
 <!-- If Search Term has only 1 result, design  -->
-<body *ngIf="planetFoundDisplay" background="{{soloPlanet.coverUrl}}" style="background-size: cover; background-blend-mode: overlay; background-color: rgba(255, 255, 255, 0.486)">
-    <div>
-    <table>
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Mass</th>
-                <th>Radius</th>
-                <th>Period</th>
-                <th>Semi-Major Axis</th>
-                <th>Temperature</th>
-                <th>Distance (Light Years)</th>
-                <th>Host Star mass</th>
-                <th>Host Star temperature</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>{{ soloPlanet.name }}</td>
-                <td>{{ soloPlanet.mass }}</td>
-                <td>{{ soloPlanet.radius }}</td>
-                <td>{{ soloPlanet.period }}</td>
-                <td>{{ soloPlanet.semi_major_axis }}</td>
-                <td>{{ soloPlanet.temperature }}</td>
-                <td>{{ soloPlanet.distance_light_year }}</td>
-                <td>{{ soloPlanet.host_star_mass }}</td>
-                <td>{{ soloPlanet.host_star_temperature }}</td>
-            </tr>
-        </tbody>
-    </table>
-    <div>
-        {{ soloPlanet.description }}
-        <img src="{{soloPlanet.thumbnailUrl}}" width="50px">
+<body *ngIf="planetFoundDisplay" background="{{soloPlanet.coverUrl}}" style="background-size: cover; background-blend-mode: overlay; background-color: rgba(255, 255, 255, 0.3)">
+    <marquee behavior="" direction="">
+        In Partnership <mat-icon>handshake</mat-icon> with NinjaAPI 
+    </marquee>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-12">
+                <div class="card-group mb-0 mt-5">
+                    <div class="card col-2 p-3 profile-box">
+                        <h1 style="font-family:'Courier New', Courier, monospace; font-weight: bold;">{{ soloPlanet.name }}</h1>
+                        <img class="rounded-circle img-center" src="{{ soloPlanet.thumbnailUrl }}" width="200">
+                        <br>
+                        <ul class="list-unstyled">
+                            <li>
+                                <mat-icon class="mat-icon-format">scale</mat-icon> 
+                                {{ soloPlanet.mass }} x Mass of Jupiter
+                            </li>
+                            <li>
+                                <mat-icon class="mat-icon-format">keyboard_double_arrow_down</mat-icon> 
+                                <span>{{ soloPlanet.gravity }} m/s<sup>2</sup></span> 
+                            </li>
+                            <li>
+                                <mat-icon class="mat-icon-format">calendar_today</mat-icon>
+                                {{ soloPlanet.period }} Days to orbit Parent Star
+                            </li>
+                            <li>
+                                <mat-icon class="mat-icon-format">location_on</mat-icon>
+                                {{ soloPlanet.distance_light_year }} Light Years from Earth
+                            </li>
+                        </ul>
+                    </div>
+                    <hr>
+                    <div class="card col-5 p-5" style="background-color: transparent">
+                        <h2 style="border-bottom: 1px solid grey;">Details</h2>
+                        <br>
+                        <span>Residing {{ soloPlanet.semi_major_axis }} AU from a {{ soloPlanet.star_type }} ({{ soloPlanet.host_star_mass }} times the mass of Sun)</span>
+                        <br>
+                        <p>{{ soloPlanet.description }}</p>
+                        <br>
+                        <div class="space-even">
+                            <span style="font-weight:500; font-size: 20px;">Est. Travel Time: {{ soloPlanet.travel_time }} Years</span>
+                            <span style="font-weight:500; font-size: 20px;">S$ {{ soloPlanet.cost }}</span>
+                        </div>
+                        <br>
+                        <div class="button-center">
+                            <button (click)="toggleBooking()" mat-raised-button class="rounded p-2" style="background-color: lightsteelblue;"><mat-icon>shopping_cart</mat-icon>Add to Booking!</button>
+                        </div>
+                        <br><br>
+                        <div class="row">
+                            <!-- BOOKING FORM -->
+                            <div *ngIf="bookingBoolean" class="booking-box p-3 rounded">
+                                <h3 style="border-bottom: 1px solid lightgray; font-weight: 500; font-size: 20px;">Fill in to book your trip now!</h3>
+                                <form [formGroup]="bookingForm" (ngSubmit)="processBooking()">
+                                    <input type="hidden" placeholder="{{ dreamer.dreamerId }}" formControlName="dreamerId">
+                                    <input type="hidden" placeholder="{{ soloPlanet.name }}" formControlName="planet">
+                                    <input type="hidden" placeholder="{{ soloPlanet.thumbnailUrl }}" formControlName="planetThumbnail">
+                                    <input type="hidden" placeholder="{{ soloPlanet.cost }}" formControlName="totalCost">
+                                    <mat-form-field appearance="outline" class="form-field">
+                                        <mat-label>Number of Pax</mat-label>
+                                        <mat-select placeholder="Number of pax" formControlName="numberOfPax">
+                                            <mat-option *ngFor="let n of [1,2,3,4,5,6,7,8]" [value]="n">
+                                                {{n}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                    <br>
+                                    <mat-form-field appearance="outline" class="form-field">
+                                        <mat-label>Date of Travel</mat-label>
+                                        <input style="padding-top: 10px;" matInput [matDatepicker]="picker"
+                                            formControlName="travelDate">
+                                        <mat-hint align="end">MM/DD/YYYY</mat-hint>
+                                        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                                        <mat-datepicker #picker></mat-datepicker>
+                                    </mat-form-field>
+                                    <div>
+                                        <button type="submit" mat-raised-button class="rounded p-2" style="background-color: lightsteelblue;"><mat-icon>shopping_cart</mat-icon>Book!</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    </div>
-    <!-- name:string
-    mass:number
-    period:number
-    semi_major_axis:number
-    distance_light_year:number
-    host_star_mass:number
-    host_star_temperature:number
-    gravity:number
-    star_type:string
-    travel_time:number
-    cost:number
-    description:string
-    thumbnailUrl:string
-    coverUrl:string -->
 </body>

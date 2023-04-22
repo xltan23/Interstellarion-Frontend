@@ -3,9 +3,11 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
+import { Booking } from 'src/app/models/booking';
 import { Dreamer } from 'src/app/models/dreamer';
 import { Planet, PlanetSearch } from 'src/app/models/planet';
 import { AuthenticationService } from 'src/app/services/authentication.service';
+import { BookingService } from 'src/app/services/booking.service';
 import { PlanetService } from 'src/app/services/planet.service';
 import { UserService } from 'src/app/services/user.service';
 
@@ -30,14 +32,17 @@ export class PlanetProfileComponent implements OnInit, OnDestroy {
   // Boolean to display specific div for specific search results
   notFoundDisplay:boolean = false
   notFoundMessage!:string
-  planetFoundDisplay:boolean = false
   listFoundDisplay:boolean = false
+  planetFoundDisplay:boolean = false
+  bookingBoolean:boolean = false
+
+  bookingForm!:FormGroup
   searchForm!:FormGroup
 
   param$!:Subscription
 
   constructor(private router:Router, private activatedRoute:ActivatedRoute, private authSvc:AuthenticationService, private userSvc:UserService,
-              private planetSvc:PlanetService, private fb:FormBuilder, private toastrSvc:ToastrService) {
+              private planetSvc:PlanetService, private bookingSvc:BookingService, private fb:FormBuilder, private toastrSvc:ToastrService) {
                 // To perform page reloads whenever router navigates to same URL
                 this.param$ = router.events.subscribe((event:any) => {
                   if (event instanceof NavigationEnd) {
@@ -68,6 +73,14 @@ export class PlanetProfileComponent implements OnInit, OnDestroy {
     this.toastrSvc.success('See you again, Dreamer!')
   }
 
+  toggleBooking(): void {
+    if (!this.bookingBoolean) {
+      this.bookingBoolean = true
+    } else {
+      this.bookingBoolean = false
+    }
+  }
+
   processSearch() {
     const planetName = this.searchForm.value as PlanetSearch
     this.router.navigate([`/planets/${planetName.searchTerm}`])
@@ -77,9 +90,33 @@ export class PlanetProfileComponent implements OnInit, OnDestroy {
     // }) 
   }
 
+  processBooking() {
+    const booking = this.bookingForm.value as Booking
+    
+    this.bookingSvc.saveTemporaryBooking(booking)
+                    .then((response) => {
+                      this.toastrSvc.success(response.message)
+                      this.router.navigate(['/cart'])
+                    })
+                    .catch((errorResponse) => {
+                      this.toastrSvc.error(errorResponse.error.message)
+                    })
+  }
+
   createSearchForm():FormGroup {
     return this.fb.group({
       searchTerm:this.fb.control('', [Validators.required])
+    })
+  }
+
+  createBookingForm():FormGroup {
+    return this.fb.group({
+      dreamerId:this.fb.control('', [Validators.required]),
+      planet:this.fb.control('', [Validators.required]),
+      planetThumbnail:this.fb.control('', [Validators.required]),
+      totalCost:this.fb.control(0, [Validators.required]),
+      numberOfPax:this.fb.control(1, [Validators.required]),
+      travelDate:this.fb.control<Date>(new Date(), [Validators.required])
     })
   }
 
@@ -98,6 +135,14 @@ export class PlanetProfileComponent implements OnInit, OnDestroy {
                       if (this.planetList.length == 1) {
                         this.planetFoundDisplay = true
                         this.soloPlanet = this.planetList[0]
+                        this.bookingForm = this.fb.group({
+                          dreamerId:this.fb.control(this.dreamer.dreamerId, [Validators.required]),
+                          planet:this.fb.control(this.soloPlanet.name, [Validators.required]),
+                          planetThumbnail:this.fb.control(this.soloPlanet.thumbnailUrl, [Validators.required]),
+                          totalCost:this.fb.control(this.soloPlanet.cost, [Validators.required]),
+                          numberOfPax:this.fb.control(1, [Validators.required]),
+                          travelDate:this.fb.control<Date>(new Date(), [Validators.required])
+                        })
                       }
                     })
                     .catch((errorResponse) => {

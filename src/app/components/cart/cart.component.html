@@ -31,3 +31,30 @@
         </div>
     </div>
 </nav>
+
+<body background="https://xlbucket.sgp1.digitaloceanspaces.com/Interstellar3" style="background-size: cover; background-blend-mode: overlay; background-color: rgba(255, 255, 255, 0.2)">
+    <marquee behavior="" direction="">
+        Please make payment within 15 minutes to avoid losing the booking.
+    </marquee>
+    <div class="mt-5 book-box" *ngIf="!bookingBoolean">
+        <span>You have no booking that has pending payment</span>
+    </div>
+    <div class="mt-5" *ngIf="bookingBoolean">
+        <mat-nav-list>
+            <a mat-list-item [routerLink]="['/planets', planet]">
+                <div class="nav-box rounded">
+                <img class="rounded-circle" width="30" src="{{booking.planetThumbnail}}"/>
+                <span class="planet-style">{{booking.planet}}</span>
+                <span><mat-icon class="mat-icon-format">groups</mat-icon> {{booking.numberOfPax}}</span>
+                <span><mat-icon class="mat-icon-format">calendar_today</mat-icon> {{booking.stringDate}}</span>
+                <span><mat-icon class="mat-icon-format">paid</mat-icon> S${{booking.totalCost}}</span>
+                </div>
+            </a>
+        </mat-nav-list>
+        <form [formGroup]="bookingForm" (ngSubmit)="processBooking()">
+            <div class="button-center mt-5">
+                <button type="submit" mat-raised-button class="rounded p-2" style="background-color: antiquewhite;"><mat-icon>payments</mat-icon>Checkout!</button>
+            </div>
+        </form>
+    </div>
+</body>

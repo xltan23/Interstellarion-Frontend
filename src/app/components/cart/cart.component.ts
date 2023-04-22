@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { Booking } from 'src/app/models/booking';
 import { Dreamer } from 'src/app/models/dreamer';
 import { PlanetSearch } from 'src/app/models/planet';
 import { AuthenticationService } from 'src/app/services/authentication.service';
@@ -15,6 +16,9 @@ import { BookingService } from 'src/app/services/booking.service';
 export class CartComponent implements OnInit {
 
   dreamer!:Dreamer
+  booking!:Booking
+  planet!:string
+  bookingBoolean:boolean = false
   searchForm!:FormGroup
   bookingForm!:FormGroup
 
@@ -24,7 +28,7 @@ export class CartComponent implements OnInit {
   ngOnInit(): void {
       this.dreamer = this.authSvc.getDreamerFromLocalCache()
       this.searchForm = this.createSearchForm()
-      this.bookingForm = this.createBookingForm()
+      this.getTemporaryBooking(this.dreamer.dreamerId)
   }
 
   onLogout(): void {
@@ -38,21 +42,33 @@ export class CartComponent implements OnInit {
     this.router.navigate([`/planets/${planetName.searchTerm}`])
   }
 
+  processBooking() {
+    
+  }
+
   createSearchForm():FormGroup {
     return this.fb.group({
       searchTerm:this.fb.control('', [Validators.required])
     })
   }
 
-  createBookingForm():FormGroup {
-    return this.fb.group({
-      dreamerId:this.fb.control(''),
-      planet:this.fb.control(''),
-      planetThumbnail:this.fb.control(''),
-      numberOfPax:this.fb.control(0),
-      travelDate:this.fb.control(''),
-      travelCost:this.fb.control('')
-    })
+  getTemporaryBooking(dreamerId:string) {
+    this.bookingSvc.getTemporaryBooking(dreamerId)
+                    .then((response) => {
+                      this.booking = response
+                      if (this.booking.planet != null) {
+                        this.bookingBoolean = true
+                        this.planet = this.booking.planet
+                      }
+                      this.bookingForm = this.fb.group({
+                        dreamerId:this.fb.control(this.booking.dreamerId),
+                        planet:this.fb.control(this.booking.planet),
+                        numberOfPax:this.fb.control(this.booking.numberOfPax),
+                        travelDate:this.fb.control(this.booking.travelDate),
+                        totalCost:this.fb.control(this.booking.totalCost) })
+                    })
+                    .catch((errorResponse) => {
+                      this.toastrSvc.error(errorResponse.error.message)
+                    })
   }
-
 }
