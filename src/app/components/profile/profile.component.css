@@ -1,5 +1,13 @@
+body {
+    overflow: scroll;
+}
+
 .space-end-end {
     justify-content: space-between;
+}
+
+.container {
+    opacity: 70%;
 }
 
 .search-form {

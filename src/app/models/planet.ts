@@ -33,6 +33,11 @@ export interface PlanetUpdate {
     cover:File
 }
 
+export interface BackgroundPost {
+    title:string
+    background:File
+}
+
 export class Apod {
     constructor(
         public date:string,

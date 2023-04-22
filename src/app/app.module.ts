@@ -21,6 +21,8 @@ import { PlanetService } from './services/planet.service';
 import { PlanetProfileComponent } from './components/planet-profile/planet-profile.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { AdminService } from './services/admin.service';
+import { BookingService } from './services/booking.service';
+import { CartComponent } from './components/cart/cart.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,8 @@ import { AdminService } from './services/admin.service';
     ProfileComponent,
     PlanetComponent,
     PlanetProfileComponent,
-    AdminComponent
+    AdminComponent,
+    CartComponent
   ],
   imports: [
     BrowserModule,
@@ -42,7 +45,7 @@ import { AdminService } from './services/admin.service';
     MaterialModule,
     ToastrModule.forRoot()
   ],
-  providers: [AuthenticationGuard, AuthenticationService, UserService, PlanetService, AdminService,
+  providers: [AuthenticationGuard, AuthenticationService, UserService, PlanetService, AdminService, BookingService,
   {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}],
   bootstrap: [AppComponent]
 })

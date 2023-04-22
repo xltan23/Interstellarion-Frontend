@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { environment } from "../environments/environment";
 import { HttpClient } from "@angular/common/http";
 import { CustomHttpResponse } from "../models/http-response";
-import { PlanetUpdate } from "../models/planet";
+import { BackgroundPost, PlanetUpdate } from "../models/planet";
 import { firstValueFrom } from "rxjs";
 
 @Injectable({
@@ -21,5 +21,12 @@ export class AdminService {
         formData.set("cover", planetUpdate.cover)
         formData.set("description", planetUpdate.description)
         return firstValueFrom(this.http.put<CustomHttpResponse>(`${this.host}/planets/update`, formData))
+    }
+
+    addBackgroundImage(backgroundPost:BackgroundPost): Promise<CustomHttpResponse> {
+        const formData = new FormData()
+        formData.set("title", backgroundPost.title)
+        formData.set("background", backgroundPost.background)
+        return firstValueFrom(this.http.post<CustomHttpResponse>(`${this.host}/planets/background`, formData))
     }
 }

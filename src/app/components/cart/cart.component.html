@@ -5,13 +5,13 @@
     <div class="collapse navbar-collapse space-end-end">
         <ul class="navbar-nav">
             <li class="nav-item active">
-                <a class="nav-link text-primary" href="/dreamer"><mat-icon>home</mat-icon></a>
+                <a class="nav-link" href="/dreamer"><mat-icon>home</mat-icon></a>
             </li>
             <li>
                 <a class="nav-link" href="/planets"><mat-icon>rocket_launch</mat-icon></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/cart"><mat-icon>shopping_cart</mat-icon></a>
+                <a class="nav-link text-primary" href="/cart"><mat-icon>shopping_cart</mat-icon></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/profile"><mat-icon>account_circle</mat-icon></a>
@@ -31,24 +31,3 @@
         </div>
     </div>
 </nav>
-<marquee class="bg-dark text-white">
-        In Partnership <mat-icon>handshake</mat-icon> with NASA API 
-</marquee>
-<body *ngIf="apodBoolean" background="{{apod.hdurl}}" style="background-size: cover; background-blend-mode: overlay; background-color: rgba(255, 255, 255, 0.1)">
-    <div class="title-box">
-        <span>Coming soon: &nbsp;{{apod.title}}</span>
-        <span>{{apod.date}}</span>
-    </div>
-    <div class="explanation-box">
-        <span>{{apod.explanation}}</span>
-    </div>
-</body>
-<body *ngIf="!apodBoolean" background="https://xlbucket.sgp1.digitaloceanspaces.com/Interstellar" style="background-size: cover; background-blend-mode: overlay; background-color: rgba(255, 255, 255, 0.486)">
-    <div class="dark-box text-white">
-        <span>{{apod.title}}</span>
-        <span>{{apod.date}}</span>
-    </div>
-    <div class="explanation-box">
-        <span>{{apod.explanation}}</span>
-    </div>
-</body>

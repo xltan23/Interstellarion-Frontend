@@ -1,3 +1,8 @@
+body {
+    overflow: scroll;
+    cursor: pointer;
+}
+
 .space-end-end {
     justify-content: space-between;
 }
@@ -10,6 +15,12 @@
 .search-button {
     height: 65px;
     width: 50px;
+}
+
+.notfound-box {
+    display: flex;
+    justify-content: center;
+    font-size: x-large;
 }
 
 .title-box {

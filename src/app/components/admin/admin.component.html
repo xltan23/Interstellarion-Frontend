@@ -19,8 +19,23 @@
             <mat-icon>photo_camera</mat-icon> &nbsp; &nbsp; 
             <mat-label>Planet Cover</mat-label> &nbsp; &nbsp; 
             <input type="file" size="50" formControlName="cover" #imageC>
-            <br>
+            <br><br>
             <button mat-raised-button type="submit" [disabled]="updateForm.invalid">Update!</button>
+        </form>
+    </div>
+    <div class="row justify-content-center mt-3" >
+        <h2>Add Background Images</h2>
+        <form [formGroup]="backgroundForm" (ngSubmit)="processBackground()">
+            <mat-form-field appearance="outline" class="form-field">
+                <mat-label>Background title</mat-label>
+                <input style="padding-top: 10px;" matInput size="50" placeholder="Type here" formControlName="title">
+            </mat-form-field>
+            <br><br>
+            <mat-icon>photo_camera</mat-icon> &nbsp; &nbsp; 
+            <mat-label>Background image</mat-label> &nbsp; &nbsp; 
+            <input type="file" size="50" formControlName="background" #imageB>
+            <br>
+            <button mat-raised-button type="submit" [disabled]="updateForm.invalid">Add BG Image!</button>
         </form>
     </div>
 </div>

@@ -1,3 +1,8 @@
+body {
+    overflow: scroll;
+    cursor: pointer;
+}
+
 .space-end-end {
     justify-content: space-between;
 }
@@ -14,6 +19,7 @@
 
 .filter-nav {
     background-color: lightsteelblue;
+    opacity: 80%;
 }
 
 .filter-span {
