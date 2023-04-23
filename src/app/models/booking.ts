@@ -4,7 +4,7 @@ export interface Booking {
     planetThumbnail:string
     numberOfPax:number
     travelDate:Date
-    stringDate:Date
+    stringDate:string
     totalCost:number
 }
 

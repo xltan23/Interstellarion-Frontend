@@ -1,0 +1,42 @@
+<nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+    &nbsp; &nbsp; &nbsp; &nbsp; 
+    <a class="navbar-brand" href="/dreamer">Interstellarion</a>
+    
+    <div class="collapse navbar-collapse space-end-end">
+        <ul class="navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link" href="/dreamer"><mat-icon>home</mat-icon></a>
+            </li>
+            <li>
+                <a class="nav-link" href="/planets"><mat-icon>rocket_launch</mat-icon></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-primary" href="/cart"><mat-icon>shopping_cart</mat-icon></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/profile"><mat-icon>account_circle</mat-icon></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-danger" href="#" (click)="onLogout()"><mat-icon>logout</mat-icon></a>
+            </li>
+        </ul>
+        <div class="search-form rounded">
+            <form [formGroup]="searchForm" (ngSubmit)="processSearch()">
+                <mat-form-field appearance="outline" class="form-field" color="primary" background-color="white">
+                    <mat-label>Search</mat-label>
+                    <input type="text" style="padding-top: 10px;" aria-label="Search" matInput size="50" placeholder="Type here" formControlName="searchTerm">
+                    <button class="bg-dark text-white search-button" mat-raised-button matSuffix type="submit"><mat-icon>travel_explore</mat-icon></button>
+                </mat-form-field>       
+            </form>
+        </div>
+    </div>
+</nav>
+
+<body background="https://xlbucket.sgp1.digitaloceanspaces.com/Interstellar3" style="background-size: cover; background-blend-mode: overlay; background-color: rgba(255, 255, 255, 0.2)">
+    <div class="mt-5 book-box">
+        <mat-icon class="mat-icon-format">done</mat-icon>
+        <span>Your trip to {{booking.planet}} has been booked!</span>
+    </div>
+</body>
+
+

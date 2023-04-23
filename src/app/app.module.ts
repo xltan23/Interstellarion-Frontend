@@ -23,6 +23,7 @@ import { AdminComponent } from './components/admin/admin.component';
 import { AdminService } from './services/admin.service';
 import { BookingService } from './services/booking.service';
 import { CartComponent } from './components/cart/cart.component';
+import { SuccessComponent } from './components/success/success.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { CartComponent } from './components/cart/cart.component';
     PlanetComponent,
     PlanetProfileComponent,
     AdminComponent,
-    CartComponent
+    CartComponent,
+    SuccessComponent
   ],
   imports: [
     BrowserModule,

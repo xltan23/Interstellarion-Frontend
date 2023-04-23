@@ -22,6 +22,10 @@ export class BookingService {
         return firstValueFrom(this.http.get<Booking>(`${this.host}/travel/${dreamerId}`))
     }
 
+    getBookings(dreamerId:string): Promise<Booking[]> {
+        return firstValueFrom(this.http.get<Booking[]>(`${this.host}/travel/history/${dreamerId}`))
+    } 
+
     checkoutBooking(booking:Booking): Promise<PaymentResponse> {
         console.log('Checking out Booking')
         return firstValueFrom(this.http.post<PaymentResponse>(`${this.host}/checkout/pay`, booking))

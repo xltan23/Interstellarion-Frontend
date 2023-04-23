@@ -82,6 +82,15 @@
                     </ul>
                     <br>
                     <br>
+                    <h2 style="border-bottom: 1px solid lightgray;">Travel Log</h2>
+                    <table>
+                        <tr *ngFor="let booking of bookingList">
+                            <td><mat-icon>calendar_today</mat-icon> {{ booking.stringDate }}</td>
+                            <td><mat-icon>rocket_launch</mat-icon> Trip to {{ booking.planet}}</td>
+                        </tr>
+                    </table>
+                    <br>
+                    <br>
                     <div class="row">
                         <div class="col-3">
                             <button (click)="toggleEdit()" mat-raised-button class="edit-button rounded p-2" style="background-color: lightskyblue;"><mat-icon>edit</mat-icon> Edit Profile</button>

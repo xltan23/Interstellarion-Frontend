@@ -1,3 +1,4 @@
+<body background="https://xlbucket.sgp1.digitaloceanspaces.com/Interstellar" style="background-size: cover; background-blend-mode: overlay; background-color: rgba(255, 255, 255, 0.486)">
 <div class="container">
     <div class="row justify-content-center mt-3">
         <h2>Update Planet Profile</h2>
@@ -23,6 +24,7 @@
             <button mat-raised-button type="submit" [disabled]="updateForm.invalid">Update!</button>
         </form>
     </div>
+    <hr>
     <div class="row justify-content-center mt-3" >
         <h2>Add Background Images</h2>
         <form [formGroup]="backgroundForm" (ngSubmit)="processBackground()">
@@ -39,3 +41,4 @@
         </form>
     </div>
 </div>
+</body>

@@ -3,9 +3,11 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { Booking } from 'src/app/models/booking';
 import { DeleteAccount, Dreamer, PasswordReset } from 'src/app/models/dreamer';
 import { PlanetSearch } from 'src/app/models/planet';
 import { AuthenticationService } from 'src/app/services/authentication.service';
+import { BookingService } from 'src/app/services/booking.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -28,7 +30,9 @@ export class ProfileComponent implements OnInit {
   imageURL!:SafeUrl
   firstName!:string
   lastName!:string
+  bookingList:Booking[] = []
 
+  logBoolean:boolean = false
   editBoolean:boolean = false
   resetBoolean:boolean = false
   deleteBoolean:boolean = false
@@ -38,12 +42,13 @@ export class ProfileComponent implements OnInit {
   resetForm!:FormGroup
   deleteForm!:FormGroup
 
-  constructor(private router:Router, private authSvc:AuthenticationService, private userSvc:UserService,
+  constructor(private router:Router, private authSvc:AuthenticationService, private userSvc:UserService, private bookingSvc:BookingService,
               private toastrSvc:ToastrService, private fb:FormBuilder, private sanitizer:DomSanitizer) {}
 
   ngOnInit(): void {
       this.dreamer = this.authSvc.getDreamerFromLocalCache()
       this.getProfileImage();
+      this.getBookings(this.dreamer.dreamerId)
       this.searchForm = this.createSearchForm()
       this.editForm = this.createEditForm()
       this.resetForm = this.createResetForm()
@@ -71,6 +76,15 @@ export class ProfileComponent implements OnInit {
     this.authSvc.logOut()
     this.router.navigate(['/login'])
     this.toastrSvc.success('See you again, Dreamer!')
+  }
+
+  toggleLog(): void {
+    if (!this.editBoolean) {
+      this.editBoolean = true
+      this.getBookings(this.dreamer.dreamerId);
+    } else {
+      this.editBoolean = false
+    }
   }
 
   toggleEdit(): void {
@@ -183,5 +197,15 @@ export class ProfileComponent implements OnInit {
       password: this.fb.control('', [Validators.required, Validators.minLength(8)]),
       email: this.fb.control(this.dreamer.email)
     })
+  }
+
+  getBookings(dreamerId:string) {
+    this.bookingSvc.getBookings(dreamerId)
+                    .then((response) => {
+                      this.bookingList = response
+                    })
+                    .catch((errorResponse) => {
+                      this.toastrSvc.error(errorResponse.error.message)
+                    })
   }
 }

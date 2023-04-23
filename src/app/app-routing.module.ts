@@ -9,6 +9,7 @@ import { AuthenticationGuard } from './guard/authentication.guard';
 import { PlanetProfileComponent } from './components/planet-profile/planet-profile.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { CartComponent } from './components/cart/cart.component';
+import { SuccessComponent } from './components/success/success.component';
 
 const routes: Routes = [
   {path: 'login', component:LoginComponent},
@@ -18,6 +19,7 @@ const routes: Routes = [
   {path: 'planets/:planet', component:PlanetProfileComponent, canActivate:[AuthenticationGuard], runGuardsAndResolvers: 'always'},
   {path: 'profile', component:ProfileComponent, canActivate:[AuthenticationGuard]},
   {path: 'cart', component:CartComponent, canActivate:[AuthenticationGuard]},
+  {path: 'checkout/success', component:SuccessComponent, canActivate:[AuthenticationGuard]},
   {path: 'admin', component:AdminComponent, canActivate:[AuthenticationGuard]},
   {path: '**', redirectTo: '/login', pathMatch: 'full'}
 ];
