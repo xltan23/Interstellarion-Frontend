@@ -7,3 +7,8 @@ export interface Booking {
     stringDate:Date
     totalCost:number
 }
+
+export interface PaymentResponse {
+    redirectUrl:string
+    status:string
+}

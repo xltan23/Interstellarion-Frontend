@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { environment } from "../environments/environment";
 import { HttpClient } from "@angular/common/http";
-import { Booking } from "../models/booking";
+import { Booking, PaymentResponse } from "../models/booking";
 import { firstValueFrom } from "rxjs";
 import { CustomHttpResponse } from "../models/http-response";
 
@@ -20,5 +20,10 @@ export class BookingService {
 
     getTemporaryBooking(dreamerId:string): Promise<Booking> {
         return firstValueFrom(this.http.get<Booking>(`${this.host}/travel/${dreamerId}`))
+    }
+
+    checkoutBooking(booking:Booking): Promise<PaymentResponse> {
+        console.log('Checking out Booking')
+        return firstValueFrom(this.http.post<PaymentResponse>(`${this.host}/checkout/pay`, booking))
     }
 }

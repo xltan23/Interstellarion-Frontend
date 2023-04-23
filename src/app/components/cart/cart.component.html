@@ -53,6 +53,11 @@
         </mat-nav-list>
         <form [formGroup]="bookingForm" (ngSubmit)="processBooking()">
             <div class="button-center mt-5">
+                <input type="hidden" formControlName="dreamerId">
+                <input type="hidden" formControlName="planet">
+                <input type="hidden" formControlName="numberOfPax">
+                <input type="hidden" formControlName="stringDate">
+                <input type="hidden" formControlName="totalCost">
                 <button type="submit" mat-raised-button class="rounded p-2" style="background-color: antiquewhite;"><mat-icon>payments</mat-icon>Checkout!</button>
             </div>
         </form>

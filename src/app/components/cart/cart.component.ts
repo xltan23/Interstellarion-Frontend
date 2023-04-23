@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { Booking } from 'src/app/models/booking';
+import { Booking, PaymentResponse } from 'src/app/models/booking';
 import { Dreamer } from 'src/app/models/dreamer';
 import { PlanetSearch } from 'src/app/models/planet';
 import { AuthenticationService } from 'src/app/services/authentication.service';
@@ -17,6 +17,7 @@ export class CartComponent implements OnInit {
 
   dreamer!:Dreamer
   booking!:Booking
+  paymentResponse!:PaymentResponse
   planet!:string
   bookingBoolean:boolean = false
   searchForm!:FormGroup
@@ -43,7 +44,15 @@ export class CartComponent implements OnInit {
   }
 
   processBooking() {
-    
+    const booking = this.bookingForm.value as Booking
+    this.bookingSvc.checkoutBooking(booking)
+                    .then((response:PaymentResponse) => {
+                      this.paymentResponse = response
+                      window.location.href = this.paymentResponse.redirectUrl
+                    })
+                    .catch((errorResponse) => {
+                      console.log(errorResponse)
+                    })
   }
 
   createSearchForm():FormGroup {
@@ -64,7 +73,7 @@ export class CartComponent implements OnInit {
                         dreamerId:this.fb.control(this.booking.dreamerId),
                         planet:this.fb.control(this.booking.planet),
                         numberOfPax:this.fb.control(this.booking.numberOfPax),
-                        travelDate:this.fb.control(this.booking.travelDate),
+                        stringDate:this.fb.control(this.booking.stringDate),
                         totalCost:this.fb.control(this.booking.totalCost) })
                     })
                     .catch((errorResponse) => {
