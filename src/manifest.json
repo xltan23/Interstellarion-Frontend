@@ -3,7 +3,7 @@
   "short_name": "Interstellarion",
   "theme_color": "#000080",
   "background_color": "#b0c4de",
-  "display": "standalone",
+  "display": "browser",
   "orientation": "landscape",
   "scope": "/",
   "start_url": "/index.html",
