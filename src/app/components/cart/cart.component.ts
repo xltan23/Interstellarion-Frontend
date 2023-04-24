@@ -34,8 +34,8 @@ export class CartComponent implements OnInit {
 
   onLogout(): void {
     this.authSvc.logOut()
+    this.toastrSvc.success('See you again, Dreamer!')
     this.router.navigate(['/login'])
-    this.toastrSvc.success('See your again, Dreamer!')
   }
 
   processSearch() {

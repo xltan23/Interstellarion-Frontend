@@ -36,8 +36,8 @@ export class PlanetComponent implements OnInit {
 
   onLogout(): void {
     this.authSvc.logOut()
-    this.router.navigate(['/login'])
     this.toastrSvc.success('See you again, Dreamer!')
+    this.router.navigate(['/login'])
   }
 
   processSearch() {
