@@ -4,14 +4,15 @@
     <div class="row justify-content-center">
         <!-- Encompass Login and Sign up boxes-->
       <div class="col-md-7 mt-5">
-        <div class="card-group mb-0 mt-5">
+        <div class="card-group mb-0 mt-3">
           <!-- LOGIN BOX -->
           <div class="card p-3">
             <div class="card-body">
               <h1 class="card-title">Login</h1>
               <p class="card-subtitle text-muted my-3">Sign in to your account</p>
-              <span>Email: tanxianliang23@gmail.com</span>
-              <span>Password: Visa!1234</span>
+              <span style="font-size: small;">Email: tanxianliang23@gmail.com</span>
+              <br>
+              <span style="font-size: small;">Password: Visa!1234</span>
               <!-- LOGIN FORM -->
                 <form [formGroup]="loginForm" (ngSubmit)="processLogin()">
                     <mat-form-field appearance="outline" class="form-field">
