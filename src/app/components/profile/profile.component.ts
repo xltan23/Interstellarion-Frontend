@@ -78,15 +78,6 @@ export class ProfileComponent implements OnInit {
     this.toastrSvc.success('See you again, Dreamer!')
   }
 
-  toggleLog(): void {
-    if (!this.editBoolean) {
-      this.editBoolean = true
-      this.getBookings(this.dreamer.dreamerId);
-    } else {
-      this.editBoolean = false
-    }
-  }
-
   toggleEdit(): void {
     if (!this.editBoolean) {
       this.editBoolean = true

@@ -46,7 +46,8 @@ th, td {
 
 .profile-box {
     text-align: center;
-    background-color: transparent;
+    background-color: lightgray;
+    opacity: 70%;
 }
 
 .img-center {
@@ -68,5 +69,5 @@ th, td {
 
 .booking-box {
     background-color: antiquewhite;
-    opacity: 80%;
+    /* opacity: 80%; */
 }

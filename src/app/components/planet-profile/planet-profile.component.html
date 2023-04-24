@@ -33,14 +33,14 @@
 </nav>
 
 <!-- If Search Term not found -->
-<body *ngIf="notFoundDisplay" background="https://xlbucket.sgp1.digitaloceanspaces.com/Avatar" style="background-size: cover; background-blend-mode: overlay; background-color: rgba(255, 255, 255, 0.6)">
+<body *ngIf="notFoundDisplay" background="https://xlbucket.sgp1.digitaloceanspaces.com/AvatarCover" style="background-size: cover; background-blend-mode: overlay; background-color: rgba(255, 255, 255, 0.6)">
     <div class="notfound-box mt-5">
         {{ notFoundMessage }}
     </div>
 </body>
 
 <!-- If Search Term returns list of results -->
-<body *ngIf="listFoundDisplay" background="https://xlbucket.sgp1.digitaloceanspaces.com/Avatar" style="background-size: cover; background-blend-mode: overlay; background-color: rgba(255, 255, 255, 0.6)">
+<body *ngIf="listFoundDisplay" background="https://xlbucket.sgp1.digitaloceanspaces.com/AvatarCover" style="background-size: cover; background-blend-mode: overlay; background-color: rgba(255, 255, 255, 0.6)">
     <marquee behavior="" direction="">
         In Partnership <mat-icon>handshake</mat-icon> with NinjaAPI 
     </marquee>
@@ -74,7 +74,7 @@
 </body>
 
 <!-- If Search Term has only 1 result, design  -->
-<body *ngIf="planetFoundDisplay" background="{{soloPlanet.coverUrl}}" style="background-size: cover; background-blend-mode: overlay; background-color: rgba(255, 255, 255, 0.3)">
+<body *ngIf="planetFoundDisplay" background="{{soloPlanet.coverUrl}}" style="background-size: cover; background-blend-mode: overlay; background-color: rgba(255, 255, 255, 0.2)">
     <marquee behavior="" direction="">
         In Partnership <mat-icon>handshake</mat-icon> with NinjaAPI 
     </marquee>
@@ -106,7 +106,7 @@
                         </ul>
                     </div>
                     <hr>
-                    <div class="card col-5 p-5" style="background-color: transparent">
+                    <div class="card col-5 p-5" style="background-color: lightgray; opacity: 70%;">
                         <h2 style="border-bottom: 1px solid grey;">Details</h2>
                         <br>
                         <span>Residing {{ soloPlanet.semi_major_axis }} AU from a {{ soloPlanet.star_type }} ({{ soloPlanet.host_star_mass }} times the mass of Sun)</span>
