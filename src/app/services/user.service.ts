@@ -4,13 +4,15 @@ import { Observable, firstValueFrom } from "rxjs";
 import { environment } from "../environments/environment";
 import { DeleteAccount, Dreamer, PasswordReset } from "../models/dreamer";
 import { CustomHttpResponse } from "../models/http-response";
+import { environment_prod } from "../environments/environment.prod";
 
 @Injectable({
     providedIn: 'root'
 })
 export class UserService {
 
-    private host = environment.apiUrl
+    // private host = environment.apiUrl
+    private host:string = environment_prod.apiUrl
 
     // CONSTRUCTOR
     constructor(private http:HttpClient) {}

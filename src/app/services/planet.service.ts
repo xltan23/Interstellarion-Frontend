@@ -3,13 +3,15 @@ import { Injectable } from "@angular/core";
 import { firstValueFrom } from "rxjs";
 import { environment } from "../environments/environment";
 import { Apod, Planet, PlanetSearch } from "../models/planet";
+import { environment_prod } from "../environments/environment.prod";
 
 @Injectable({
     providedIn: 'root'
 })
 export class PlanetService {
 
-    private host:string = environment.apiUrl
+    // private host:string = environment.apiUrl
+    private host:string = environment_prod.apiUrl
 
     // CONSTRUCTOR
     constructor(private http:HttpClient) {}

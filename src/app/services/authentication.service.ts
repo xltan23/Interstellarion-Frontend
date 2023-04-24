@@ -4,13 +4,15 @@ import { firstValueFrom, Observable, Subject } from "rxjs";
 import { Dreamer } from "../models/dreamer";
 import { JwtHelperService } from "@auth0/angular-jwt";
 import { environment } from "../environments/environment";
+import { environment_prod } from "../environments/environment.prod";
 
 @Injectable({
     providedIn: 'root'
 })
 export class AuthenticationService {
 
-    private host:string = environment.apiUrl
+    // private host:string = environment.apiUrl
+    private host:string = environment_prod.apiUrl
 
     private token!:string
     private loggedInUsername!:string

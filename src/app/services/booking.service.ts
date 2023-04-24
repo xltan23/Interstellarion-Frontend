@@ -4,13 +4,15 @@ import { HttpClient } from "@angular/common/http";
 import { Booking, PaymentResponse } from "../models/booking";
 import { firstValueFrom } from "rxjs";
 import { CustomHttpResponse } from "../models/http-response";
+import { environment_prod } from "../environments/environment.prod";
 
 @Injectable({
     providedIn: "root"
 })
 export class BookingService {
 
-    private host:string = environment.apiUrl
+    // private host:string = environment.apiUrl
+    private host:string = environment_prod.apiUrl
 
     constructor(private http:HttpClient) {}
 

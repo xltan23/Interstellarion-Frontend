@@ -4,13 +4,15 @@ import { HttpClient } from "@angular/common/http";
 import { CustomHttpResponse } from "../models/http-response";
 import { BackgroundPost, PlanetUpdate } from "../models/planet";
 import { firstValueFrom } from "rxjs";
+import { environment_prod } from "../environments/environment.prod";
 
 @Injectable({
     providedIn: 'root'
 })
 export class AdminService {
 
-    private host:string = environment.apiUrl
+    // private host:string = environment.apiUrl
+    private host:string = environment_prod.apiUrl
 
     constructor(private http:HttpClient) {}
 
