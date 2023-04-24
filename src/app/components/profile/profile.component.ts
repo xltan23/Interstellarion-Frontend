@@ -68,9 +68,7 @@ export class ProfileComponent implements OnInit {
                   })
                   .catch((errorResponse) => {
                       this.imageURL = this.dreamer.profileImageUrl
-                      console.log(errorResponse)
-                      // this.toastrSvc.error(errorResponse.error.message)
-                      //this.toastrSvc.error("Unable to retrieve profile image. Reverting back to temporary profile picture.")
+                      this.toastrSvc.error("Unable to retrieve profile image. Reverting back to temporary profile picture.")
                   })
   }
 
